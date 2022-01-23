@@ -1,0 +1,18 @@
+<div class="product-option-row">
+    <div class="product-option-label" @click="option.visible = !option.visible" :class="{ labelActive: option.visible }">
+        ${ option.name } <span>${ selected[i] }</span>
+    </div>
+    <div class="product-option-list" v-if="option.visible">
+        <template :key="i" v-for="(value, index) in option.values">
+            <div @click="selected[i] = value;
+                option.visible = false;
+                form.selections[i] = value;
+                " class="product-option-item"
+            >
+            ${ value }
+            </div>
+        </template>
+    </div>
+</div>
+
+
