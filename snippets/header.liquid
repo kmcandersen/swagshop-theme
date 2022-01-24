@@ -1,0 +1,22 @@
+<header id="header">
+    <div class="header-inner flex space-between">
+
+        <div class="menu-drawer">
+            <button class="menu-button"></button>
+            <span>{{ 'header.nav.menu' | t }}</span>
+        </div>
+
+        <a class="header-title" href="/">{{ 'general.shop.title' | t | downcase }}</a>
+        
+        {% assign cart_text = 'cart.button.count_html' | t: itemCount: cart.item_count %}
+        <div class="cart-button-container">
+            <button class="cart-button"></button>
+            <span>{{ cart_text }}</span>
+        </div>
+
+    </div>
+
+    <div class="mini-cart"></div>
+
+
+</header>
