@@ -76,7 +76,8 @@ table {
 
 /* VARIABLES */
 
-$text-font: "HelveticaNeueLTProBold", Arial, Helvetica, sans-serif;
+$bold-font: "HelveticaNeueLTProBold", Arial, Helvetica, sans-serif;
+$med-font: "Helvetica Neue LT Pro", Arial, Helvetica, sans-serif;
 
 $black: #000000;
 $white: #FFFFFF;
@@ -119,12 +120,31 @@ $button-height: $line-global*2;
     padding: 0 $offset-global;
 }
 
+h1,
+.h1 {
+  font-size: $type-headline-lg;
+  line-height: $line-global * 2;
+}
+
+h2,
+.h2 {
+  font-size: $type-headline-med;
+  line-height: $line-global;
+  margin-bottom: 5px;
+}
+
 body {
     font-weight: $type-book;
     font-size: $type-body-med;
     line-height: $line-global;
-    font-family: $text-font;
+    font-family: $bold-font;
 }
+
+p {
+    font-family: $bold-font;
+    font-size: $type-body-med;
+    line-height: $line-global;
+  }
 
 main {
     padding-top: $header-height;
@@ -150,6 +170,11 @@ main {
     width: 50%;
 }
 
+// ensure components don't leak from parent
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 .grid {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: $gutter-global;
@@ -172,9 +197,9 @@ button {
 a {
     text-decoration: none;
     color: $text-color;
-    &:hover {
-      color: $text-color-light;
-    }
+    // &:hover {
+    //   color: $text-color-light;
+    // }
     &::selection {
         background-color: $black;
         color: $white;
@@ -268,6 +293,16 @@ a {
         margin-bottom: 15px;
     }
 
+    .product-card-price {
+        letter-spacing: 0.5px;
+    }
+
+    .product-card-colors, .product-card-sizes, .product-sold-out {
+        font-family: $med-font;
+        font-size: $type-headline-sm;
+        margin-top: 5px;
+    }
+
     .swiper-container {
         overflow: hidden;
         position: absolute;
@@ -293,6 +328,51 @@ a {
             object-fit: cover;
         }
     }
+
+    .swiper-button-prev {
+        cursor: url('{{ "cursor-arrow-left.svg" | asset_url }}') 15 8, auto;
+    }
+
+    .swiper-button-next {
+        cursor: url('{{ "cursor-arrow-right.svg" | asset_url }}') 15 8, auto;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        position: absolute;
+        top: 0;
+        width: 25%;
+        height: 100%;
+        margin-top: 0;
+        outline-style: none;
+        box-shadow: none;
+        border-color: transparent;
+        // remove default slider arrows
+        &::after {
+            content: none;
+        }
+
+        @include phone {
+            display: none;
+        }
+    }
+
+    .product-card-sizes.size-toggle {
+        display: none;
+    }
+    .product-card-price.price-toggle {
+        display: block;
+    }
+
+    // only toggle bw price & size list IF product has sizes
+    .product-card-title:hover .size-toggle {
+        display: block;
+    }
+    .product-card-title:hover .price-toggle {
+        display: none;
+    }
+
 }
+
+
 
 

@@ -13,6 +13,9 @@
       "menu": "Menu"
     }   
   },
+  "product": {
+    "sold_out": "Sold Out"
+  },
   "cart": {
     "button": {
       "count_html": "Cart (<span class=\"js-cart-item-count\">{{ itemCount }}</span>)",
