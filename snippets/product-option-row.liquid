@@ -1,6 +1,6 @@
 <div class="product-option-row">
     <div class="product-option-label" @click="option.visible = !option.visible" :class="{ labelActive: option.visible }">
-        ${ option.name } <span>${ selected[i] }</span>
+        ${ option.name }: <span>${ option.name === 'Size' ? selected[i].toUpperCase() : selected[i] }</span>        
     </div>
     <div class="product-option-list" v-if="option.visible">
         <template :key="i" v-for="(value, index) in option.values">
@@ -9,7 +9,7 @@
                 form.selections[i] = value;
                 " class="product-option-item"
             >
-            ${ value }
+            ${ option.name === 'Size' ? value.toUpperCase() : value }
             </div>
         </template>
     </div>

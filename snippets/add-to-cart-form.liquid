@@ -4,7 +4,7 @@
             {% render 'product-option-row' %}
         </div>
     </template>
-    <button @click="addToCart" id="add-to-cart-button" name="add" type="submit">Add to cart</button>
+    <button @click="addToCart" id="add-to-cart-button" name="add" type="submit">{{ 'product.form.submit' | t | upcase }}</button>
 </form>
 
 <script>

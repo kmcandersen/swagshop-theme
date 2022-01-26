@@ -84,13 +84,14 @@ $white: #FFFFFF;
 
 $light-black: #333333;
 $light-white: #FAFAFA;
+$hover-white: #EDEDED;
 
 $text-color: $light-black;
 $text-color-white: #CCCCCC;
 $text-color-light: #707070;
 $text-color-light-white: #AAAAAA;
 
-$border-color: rgba(0,0,0,0.15);
+$border-color: #9a9a9a;
 $border-color-white: rgba(255,255,255,0.15);
 
 $standard-border: 1px solid $border-color;
@@ -365,6 +366,60 @@ $product-two-col-width: calc((100% - 40px)/2);
         position: relative;
         user-select: none;
     }
+
+    /* VARIANT SELECTORS */
+
+    .product-option-label, #add-to-cart-button {
+        padding: $line-global;
+        position: relative;
+        cursor: pointer;
+        border: solid;
+        border-color: $black;
+        border-width: 1px 1px 0;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        background-color: $white;
+        font-size: $type-body-med;
+        width: 100%;
+        text-align: left;
+    }
+
+    #add-to-cart-button {
+        letter-spacing: 0.8px;
+        &:hover {
+            background-color: $light-black;
+            color: $white;
+        }
+    }
+
+    .product-option-label {
+        &:hover {
+            background: $hover-white;
+        }
+    }
+
+    .product-option-list {
+        position: absolute;
+        bottom: $line-global * 3;
+        right: 0;
+        left: 0;
+        background-color: $white;
+        border: solid 1px $black;
+    }
+
+    .product-option-item {
+        padding: 25px;
+        cursor: pointer;
+
+        &:nth-child(n+2) {
+            box-shadow: inset 0 1px $border-color;
+        }
+
+        &:hover {
+            background: $hover-white;
+        }
+    }
+
 }
 
 /* COLLECTION PAGE */
