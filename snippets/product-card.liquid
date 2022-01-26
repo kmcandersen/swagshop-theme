@@ -10,7 +10,7 @@
 
 <div class="product-card">
     <a href="{{ product.url | within: collection }}" class="product-image-wrapper">
-        <div class="swiper-container swiper-container-{{- product.id -}}">
+        <div class="swiper-container-product-card swiper-container-{{- product.id -}}">
             <div class="swiper-wrapper">
                 {% for image in product.images %}
                     <div class="swiper-slide">
