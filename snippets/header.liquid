@@ -8,15 +8,52 @@
 
         <a class="header-title" href="/">{{ 'general.shop.title' | t | downcase }}</a>
         
-        {% assign cart_text = 'cart.button.count_html' | t: itemCount: cart.item_count %}
         <div class="cart-button-container">
             <button class="cart-button"></button>
-            <span>{{ cart_text }}</span>
+            <span>
+                <template v-if="cart">
+                    {{ 'header.nav.cart' | t }} (${cart.item_count})
+                </template>
+            </span>
         </div>
 
     </div>
 
-    <div class="mini-cart"></div>
+    <div class="mini-cart">
+        {% render 'mini-cart' %}
+    </div>
 
 
 </header>
+
+<script>
+    if (document.querySelector('#header')) {
+        const headerCart = Vue.createApp({
+            delimiters: ['${', '}'],
+            data() {
+                return {
+                    cartData: store.state.cartState
+                }
+            },
+            methods: {
+
+            },
+            computed: {
+                miniCart(){
+                    return miniCartState.hidden
+                },
+                menuDrawer(){
+                    return menuState.hidden
+                },
+                cart(){
+                    return this.cartData[0]
+                }
+            },
+            // when header loads, gets cart data from Shopify
+            created(){
+                store.getCart()
+            }
+        }).mount('#header')
+    }
+
+</script>

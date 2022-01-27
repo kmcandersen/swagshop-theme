@@ -58,7 +58,8 @@
                     axios
                         .post("/cart/add.js", data)
                         .then((res) => {
-                            console.log(res)
+                            // update our cart with response
+                            store.getCart()
                         })
                         .catch(err => {
                             console.log(err)

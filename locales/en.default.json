@@ -10,7 +10,8 @@
   },
   "header": {
     "nav": {
-      "menu": "Menu"
+      "menu": "Menu",
+      "cart": "Cart"
     }   
   },
   "product": {
