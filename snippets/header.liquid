@@ -8,18 +8,20 @@
 
         <a class="header-title" href="/">{{ 'general.shop.title' | t | downcase }}</a>
         
-        <div class="cart-button-container">
-            <button class="cart-button"></button>
-            <span>
-                <template v-if="cart">
-                    {{ 'header.nav.cart' | t }} (${cart.item_count})
-                </template>
-            </span>
+        <div class="cart-button-container" @click="toggleMiniCart">
+            <button class="cart-button">
+                <span>
+                    <template v-if="cart">
+                        {{ 'header.nav.cart' | t }} (${cart.item_count})
+                    </template>
+                </span>
+            </button>
         </div>
 
     </div>
 
-    <div class="mini-cart">
+    {%- comment -%} refers to miniCart func below{%- endcomment -%}
+    <div id="mini-cart" :class="{ hidden: miniCart }">
         {% render 'mini-cart' %}
     </div>
 
@@ -36,7 +38,9 @@
                 }
             },
             methods: {
-
+                toggleMiniCart(){
+                    toggleMiniCart.openCart()
+                }
             },
             computed: {
                 miniCart(){

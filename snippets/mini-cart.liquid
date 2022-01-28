@@ -1,0 +1,22 @@
+<div class="cart-form">
+    <template v-if="cart && cart.items.length > 0">
+        <div class="mini-cart-rows">
+            <div class="mini-cart-item" v-for="item in cart.items">
+                <div class="mini-cart-image-wrapper" v-if="item.image">
+                    <a :href="item.url">
+                        <img :src="item.image" :alt="item.title" />
+                    </a>
+                </div>
+                <div class="mini-cart-item-right">
+                    <div>
+                        <a :href="item.url">${ item.title }</a>
+                    </div>
+                    <div>${ item.price }</div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template v-else>
+        <p class="cart-empty">{{ 'cart.empty.title' | t }}</p>
+    </template>
+</div>
