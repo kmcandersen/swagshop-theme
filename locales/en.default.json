@@ -29,7 +29,7 @@
       "title": "The cart is empty"
     }, 
     "filled": {
-      "subtotal": "Subtotal",
+      "subtotal": "Subtotal:",
       "button": "Checkout"
     }
   }

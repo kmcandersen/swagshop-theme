@@ -22,9 +22,11 @@
 
     {%- comment -%} refers to miniCart func below{%- endcomment -%}
     <div id="mini-cart" :class="{ hidden: miniCart }">
+        <button class="mini-cart-close-button" @click="toggleMiniCart">Close</button>
         {% render 'mini-cart' %}
     </div>
-
+    {%- comment -%}displays if .hidden values below are false; click to close open mini-cart{%- endcomment -%}
+    <div class="outside" v-if="!miniCart || !miniDrawer" @click="closeAllDrawers"></div>
 
 </header>
 
@@ -40,8 +42,40 @@
             methods: {
                 toggleMiniCart(){
                     toggleMiniCart.openCart()
-                }
-            },
+                },
+                // enables click off open mini-cart to close
+                closeAllDrawers(){
+                    toggleClose.closeAll();
+                },
+                decrement(item){
+                    const data = {
+                        "id": item.key,
+                        "quantity": item.quantity - 1
+                    }
+                
+                    axios.post('/cart/change.js', data)
+                        .then(res => {
+                            store.getCart()
+                        })
+                        .catch((err) => console.log(err))
+                },
+                increment(item){
+                    const data = {
+                        "id": item.key,
+                        "quantity": item.quantity + 1
+                    }
+                
+                    axios.post('/cart/change.js', data)
+                        .then(res => {
+                            store.getCart()
+                        })
+                        .catch((err) => console.log(err))
+                },
+                money(value){
+                    if (!value) return 0;
+                    return "$" + (value/100).toFixed(2);
+                }                    
+            },           
             computed: {
                 miniCart(){
                     return miniCartState.hidden
