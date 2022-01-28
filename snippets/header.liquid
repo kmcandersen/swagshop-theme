@@ -2,8 +2,15 @@
     <div class="header-inner flex space-between">
 
         <div class="menu-drawer">
-            <button class="menu-button"></button>
-            <span>{{ 'header.nav.menu' | t }}</span>
+            {% unless template == "product" %}
+                <button class="menu-button" @click="toggleMenu">
+                    <span>{{ 'header.nav.menu' | t }}</span>
+                </button>            
+            {% else %}   
+                <a href="javascript:history.back()" class="menu-button">
+                    <span>{{ 'header.nav.back' | t }}</span>
+                </a>
+            {% endunless %}
         </div>
 
         <a class="header-title" href="/">{{ 'general.shop.title' | t | downcase }}</a>
@@ -26,7 +33,7 @@
         {% render 'mini-cart' %}
     </div>
     {%- comment -%}displays if .hidden values below are false; click to close open mini-cart{%- endcomment -%}
-    <div class="outside" v-if="!miniCart || !miniDrawer" @click="closeAllDrawers"></div>
+    <div class="outside" v-if="!miniCart || !menuDrawer" @click="closeAllDrawers"></div>
 
 </header>
 
