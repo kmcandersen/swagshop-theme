@@ -89,9 +89,9 @@ $hover-white: #EDEDED;
 $text-color: $light-black;
 $text-color-white: #CCCCCC;
 $text-color-light: #707070;
-$text-color-light-white: #AAAAAA;
+$text-color-gray: #B3B2B2;
 
-$border-color: #9a9a9a;
+$border-color: #9A9A9A;
 $border-color-white: rgba(255,255,255,0.15);
 
 $standard-border: 1px solid $border-color;
@@ -533,6 +533,7 @@ $product-two-col-width: calc((100% - 40px)/2);
     max-width: 350px;
     background-color: $white;
     padding: $header-height 25px 25px 25px;
+    border-left: 1px solid $black;
     transition-property: transform;
 
     &::before {
@@ -659,6 +660,14 @@ $product-two-col-width: calc((100% - 40px)/2);
     position: fixed;
     top: 0;
     left: 0;
+}
+
+.cart-empty {
+    color: $text-color-gray;
+    padding-top: $gutter-global;
+    font-size: $type-headline-med;
+    letter-spacing: 0.3px;
+    line-height: 1.5px;
 }
 
 /* MENU DRAWER */
