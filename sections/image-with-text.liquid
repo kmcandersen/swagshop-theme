@@ -1,0 +1,65 @@
+<div class="image-with-text section {% if section.settings.reverse %}reverse{% endif %}">
+    <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title }}">
+    <div class="image-with-text-description-container bg-color-{{ section.settings.bgcolor }}">
+        <div class="image-with-text-description">
+            <h3 class="image-with-text-head">{{ section.settings.title }}</h3>
+            {% if section.settings.text %}
+                <div class="image-with-text-body {% if section.settings.bgcolor == 'black' %}text-white{% endif %}">
+                    {{ section.settings.text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Image with Text",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Image with Text"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Description (optional)",
+            "default": "<p>Write description here</p>"
+        },
+        {
+            "type": "checkbox",
+            "id": "reverse",
+            "label": "Image on Right",
+            "default": false
+        },
+        {
+            "type": "select",
+            "id": "bgcolor",
+            "label": "Background Color",
+            "options": [
+                {
+                    "value": "white",
+                    "label": "White"
+                }, {
+                    "value": "black",
+                    "label": "Black"
+                }
+            ],
+            "default": "white"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Image with Text",
+            "category": "Image"
+        }
+    ]
+}
+{% endschema %}
