@@ -88,8 +88,7 @@ $hover-white: #EDEDED;
 
 $text-color: $light-black;
 $text-color-white: #CCCCCC;
-$text-color-light: #707070;
-$text-color-gray: #B3B2B2;
+$text-color-light: #707070; // min to pass AAA contrast check
 
 $border-color: #9A9A9A;
 $border-color-white: rgba(255,255,255,0.15);
@@ -118,7 +117,7 @@ $button-height: $line-global*2;
 
 /* PRESETS */
 
-.container, footer, header {
+.container, header {
     padding: 0 $offset-global;
 }
 
@@ -673,7 +672,7 @@ $product-two-col-width: calc((100% - 40px)/2);
 }
 
 .cart-empty {
-    color: $text-color-gray;
+    color: $text-color-light;
     padding-top: $gutter-global;
     font-size: $type-headline-med;
     letter-spacing: 0.3px;
@@ -737,6 +736,41 @@ $product-two-col-width: calc((100% - 40px)/2);
     z-index: 999;
     font-size: $type-body-med;
     cursor: pointer;
+}
+
+
+/* FOOTER SECTION */
+
+#footer {
+    margin-top: $line-global * 4;
+    margin-bottom: $line-global * 2;
+    margin-left: $offset-global;
+    margin-right: $offset-global;
+    border-top: 1px solid $black;
+}
+
+.footer-inner {
+    padding: $line-global 0;
+    font-size: $type-body-med;
+    line-height: 1.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .footer-menu a {
+        transition: color 0.5s;
+    }
+
+    .footer-menu ul:hover a {
+        color: $text-color-light;
+    }
+
+    .footer-menu li a:hover {
+        color: $black;
+    }
+}
+
+.footer-left > p {
+    font-size: $type-body-lg;
 }
 
 
@@ -857,7 +891,7 @@ $product-two-col-width: calc((100% - 40px)/2);
 .logo-list-heading {
     font-size: $type-headline-lg;
     line-height: 1.25;
-    margin-top: $line-global * 3;
+    margin-top: $line-global * 4;
     margin-bottom: $line-global * 2;
 }
 
