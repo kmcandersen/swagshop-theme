@@ -1,17 +1,15 @@
 <header id="header">
     <div class="header-inner flex space-between">
 
-        <div class="menu-drawer">
-            {% unless template == "product" %}
-                <button class="menu-button" @click="toggleMenu">
-                    <span>{{ 'header.nav.menu' | t }}</span>
-                </button>            
-            {% else %}   
-                <a href="javascript:history.back()" class="menu-button">
-                    <span>{{ 'header.nav.back' | t }}</span>
-                </a>
-            {% endunless %}
-        </div>
+        {% unless template == "product" %}
+            <button class="menu-button" @click="toggleMenu">
+                <span>{{ 'header.nav.menu' | t }}</span>
+            </button>            
+        {% else %}   
+            <a href="javascript:history.back()" class="menu-button">
+                <span>{{ 'header.nav.back' | t }}</span>
+            </a>
+        {% endunless %}
 
         <a class="header-title" href="/">{{ 'general.shop.title' | t | downcase }}</a>
         
@@ -25,6 +23,11 @@
             </button>
         </div>
 
+    </div>
+
+    {%- comment -%} refers to menuDrawer func below{%- endcomment -%}
+    <div id="menu-drawer" :class="{ hidden: menuDrawer }">
+        {% render 'menu-drawer' %}
     </div>
 
     {%- comment -%} refers to miniCart func below{%- endcomment -%}
@@ -49,6 +52,9 @@
             methods: {
                 toggleMiniCart(){
                     toggleMiniCart.openCart()
+                },
+                toggleMenu(){
+                    toggleMenu.openMenu()
                 },
                 // enables click off open mini-cart to close
                 closeAllDrawers(){
