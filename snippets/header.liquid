@@ -3,10 +3,16 @@
 
         {% unless template == "product" %}
             <button class="menu-button" @click="toggleMenu">
+                <svg class="menu-arrow-icon">
+                    {% render 'header-arrow' %}
+                </svg>
                 <span>{{ 'header.nav.menu' | t }}</span>
             </button>            
         {% else %}   
             <a href="javascript:history.back()" class="menu-button">
+                <svg class="menu-arrow-icon" style="transform: none;">
+                    {% render 'header-arrow' %}
+                </svg>
                 <span>{{ 'header.nav.back' | t }}</span>
             </a>
         {% endunless %}
@@ -20,6 +26,9 @@
                         {{ 'header.nav.cart' | t }} (${cart.item_count})
                     </template>
                 </span>
+                <svg class="cart-arrow-icon">
+                    {% render 'header-arrow' %}
+                </svg>
             </button>
         </div>
 
