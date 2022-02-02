@@ -31,7 +31,18 @@
                 </svg>
             </button>
         </div>
+    </div>
 
+    <div class="header-mobile">
+        <a href="/" class="header-title">{{ 'general.shop.title' | t | downcase }}</a>
+        <div class="mobile-nav">
+            <button class="mobile-nav-button" @click="toggleMenu">
+                <span>{{ 'header.nav.menu' | t }}</span>
+            </button>
+            <button class="mobile-nav-button" @click="toggleMiniCart">
+                <span>{{ 'header.nav.cart' | t }}</span>
+            </button>
+        </div>
     </div>
 
     {%- comment -%} refers to menuDrawer func below{%- endcomment -%}

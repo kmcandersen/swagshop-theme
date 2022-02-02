@@ -101,14 +101,19 @@ $card-grid-margin: $line-global/2; // 10px
 $gutter-global: $line-global*2; // 40px
 $offset-global: $gutter-global;
 
+$offset-phone: 25px;
+
 $header-height: 72px;
 
 $type-headline-xl: 40px;
+$type-headline-xl-phone: 25px;
 $type-headline-lg: 25px;
 $type-headline-med: 20px;
+$type-headline-med-phone: 17px;
 $type-headline-sm: 15px;
 $type-body-lg: 24px;
 $type-body-med: 16px;
+$type-body-med-phone: 15px;
 
 $type-bold: 700;
 $type-book: 400;
@@ -117,18 +122,33 @@ $button-height: $line-global*2;
 
 /* PRESETS */
 
-.container, header {
+header {
     padding: 0 $offset-global;
+
+    @include phone {
+        padding-left: $offset-phone;
+        padding-right: $offset-phone;
+    }
 }
 
 .container {
     padding: $offset-global;
+
+    @include phone {
+        padding: $offset-phone;
+        padding-bottom: $offset-global;
+    }
 }
 
 h1,
 .h1 {
   font-size: $type-headline-xl;
-  line-height: $line-global * 2;
+  line-height: $line-global * 2.25;
+
+  @include phone {
+    font-size: $type-headline-xl-phone;
+    line-height: $line-global * 1.5;
+  }
 }
 
 h2,
@@ -136,6 +156,10 @@ h2,
   font-size: $type-headline-med;
   line-height: $line-global;
   margin-bottom: 5px;
+
+  @include phone {
+    font-size: $type-headline-med-phone;
+  }
 }
 
 body {
@@ -193,6 +217,10 @@ button, input, option, textarea {
 
 .section {
     padding: 0 $offset-global;
+
+    @include phone {
+        padding: 0 $offset-phone;
+    }
  }
 
  img, picture, svg {
@@ -256,7 +284,43 @@ a {
         transform: translate(-50%);
     }
 
+}
 
+/* MOBILE NAV */
+
+.header-mobile {
+    height: $header-height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $black;
+    display: none;
+
+    @include phone {
+        display: flex;
+    }
+}
+
+.mobile-nav {
+    position: fixed;
+    bottom: $offset-phone;
+    left: 0;
+    right: 0;
+    padding: 0 $offset-phone;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mobile-nav-button {
+    background-color: $black;
+    border-bottom: 1px solid $border-color-white;
+    -webkit-font-smoothing: antialiased;
+    color: $light-white;
+    padding: 10px;
+    width: 60px;
+    text-align: center;
+    z-index: 10;
 }
 
 
@@ -317,8 +381,6 @@ $product-two-col-width: calc((100% - 40px)/2);
     grid-template-columns: repeat(2, $product-two-col-width);
     justify-content: space-between;
     margin-bottom: 32px;
-    // $header-height: 72px;
-    height: calc(100vh - 72px);
 
     @include phone {
         grid-template-columns: 100%;
@@ -361,13 +423,20 @@ $product-two-col-width: calc((100% - 40px)/2);
         display: none;
     }
 
-    .product-information {
+    // .product-information {
+    .product-description-container {
+        display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
     .product-title {
-        font-size: $type-headline-xl;
+        margin-bottom: 100px;
+        @include phone {
+            margin: $line-global/2 0 $line-global;
+            line-height: 1.2;
+        }
+
     }
     
     .product-description {
@@ -382,6 +451,7 @@ $product-two-col-width: calc((100% - 40px)/2);
     .product-option-row {
         position: relative;
         user-select: none;
+        z-index: 999;
     }
 
     /* VARIANT SELECTORS */
@@ -443,6 +513,10 @@ $product-two-col-width: calc((100% - 40px)/2);
 
 #collection {
 
+    .collection-title {
+        padding-bottom: $line-global;
+    }
+
     .collection-list {
         flex-wrap: wrap;
     }
@@ -456,7 +530,11 @@ $product-two-col-width: calc((100% - 40px)/2);
         height: 100%;
     
         @include phone {
-        width: 100%;
+            // $offset-phone = 25px * 1 gutter
+            width: calc((100% - 25px) / 2);
+            min-width: 120px;
+            margin: 0;
+            margin-bottom: $gutter-global;
         }
     }
     
@@ -476,6 +554,12 @@ $product-two-col-width: calc((100% - 40px)/2);
         font-family: $med-font;
         font-size: $type-headline-sm;
         margin-top: 5px;
+    }
+
+    .product-card-colors {
+        @include phone {
+            display: none;
+        }
     }
 
     .swiper-container-product-card {
@@ -560,6 +644,12 @@ $product-two-col-width: calc((100% - 40px)/2);
         z-index: -1;
     }
 
+    @include phone {
+        position: fixed;
+        width: calc(100vw - 50px);
+        height: 100%;
+    }
+
 }
 
 .mini-cart-image-wrapper {
@@ -585,6 +675,8 @@ $product-two-col-width: calc((100% - 40px)/2);
 
 .mini-cart-item-right {
     flex: 1;
+    // space for scrollbar
+    margin-right: 10px; 
 }
 
 .cart-form {
@@ -713,7 +805,7 @@ $product-two-col-width: calc((100% - 40px)/2);
     z-index: 99;
     max-width: 350px;
     background-color: $white;
-    padding: $header-height 25px 25px $offset-global;
+    padding: $header-height 25px $offset-global $offset-global;
     border-right: 1px solid $black;
     transition: transform 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), left 0.5s 0s;
 
@@ -787,18 +879,41 @@ $product-two-col-width: calc((100% - 40px)/2);
 /* FOOTER SECTION */
 
 #footer {
-    margin-top: $line-global * 4;
     margin-bottom: $line-global * 2;
     margin-left: $offset-global;
     margin-right: $offset-global;
     border-top: 1px solid $black;
+
+    @include phone {
+        margin-bottom: $line-global * 3;
+        margin-left: $offset-phone;
+        margin-right: $offset-phone;
+
+    }
 }
 
 .footer-inner {
     padding: $line-global 0;
     font-size: $type-body-med;
     line-height: 1.6;
+
+    @include phone {
+        flex-direction: column;
+    }
 }
+
+// applies on phone
+.footer-left, .footer-right {
+    width: 100%;
+    padding-bottom: $offset-phone;
+}
+
+.footer-social {
+    @include phone {
+        margin-left: $gutter-global;
+    }
+}
+
 
 @media (hover: hover) and (pointer: fine) {
     .footer-menu a {
@@ -846,12 +961,21 @@ $product-two-col-width: calc((100% - 40px)/2);
 
 .heading {
     font-size: $type-headline-xl;
-    line-height: 1.5;
+    line-height: 1.2;
+
+    @include phone {
+        font-size: $type-headline-xl-phone;
+    }
 }
 
 .subhead > p {
     font-size: $type-headline-med;
     font-family: $med-font;
+    margin-top: $line-global/2;
+
+    @include phone {
+        font-size: $type-headline-med-phone;
+    }
 }
 
 
@@ -887,6 +1011,10 @@ $product-two-col-width: calc((100% - 40px)/2);
     &.bg-color-black {
         background-color: $light-black;
         color: $light-white;
+
+        @include phone {
+            padding-left: $offset-phone;
+        }
     }
 }
 
@@ -896,6 +1024,19 @@ $product-two-col-width: calc((100% - 40px)/2);
     flex-direction: column;
     justify-content: center;
     width: 100%;
+
+    @include tablet {
+        padding: 25px $offset-global*1.5; 
+    }
+
+    @include phone {
+        padding: $line-global;
+        padding-right: $offset-phone;
+        padding-left: 0;
+        padding-bottom: $line-global*3;
+        justify-content: flex-start;
+        // height: 250px;
+    }
 }
 
 .image-with-text-head {
@@ -919,6 +1060,7 @@ $product-two-col-width: calc((100% - 40px)/2);
 
 .logo-list {
     width: 100%;
+    margin: $line-global * 3 0;
 }
 
 .logo-container {
@@ -936,8 +1078,12 @@ $product-two-col-width: calc((100% - 40px)/2);
 .logo-list-heading {
     font-size: $type-headline-lg;
     line-height: 1.25;
-    margin-top: $line-global * 4;
     margin-bottom: $line-global * 2;
+
+    @include phone {
+        margin-top: $line-global * 2;
+        margin-bottom: $line-global; 
+    }
 }
 
 .logo-link {

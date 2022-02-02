@@ -5,7 +5,7 @@
     <div class="logo-container">
         {% for block in section.blocks %}
             <a class="logo-link" href="{{ block.settings.link }}">
-                <img src="{{ block.settings.image | img_url: "master" }}" alt="">
+                <img src="{{ block.settings.image | img_url: "large" }}" alt="">
             </a>
         {% endfor %}
     </div>
