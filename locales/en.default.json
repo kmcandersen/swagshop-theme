@@ -1,8 +1,9 @@
 {
   "general": {
     "404": {
-      "title": "Not found",
-      "subtext_html": "The page you were looking for does not exist"
+      "error_code": "404",
+      "title": "Sorry, we couldn't find that page.",
+      "back": "Back to Shop"
     },
     "shop": {
       "title": "Swagshop"

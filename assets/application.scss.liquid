@@ -200,6 +200,21 @@ main {
     width: 50%;
 }
 
+.valign-center {
+    display: flex;
+    flex-direction: column;
+    
+    > * {
+      &:first-child {
+        margin-top: auto;
+      }
+  
+      &:last-child {
+        margin-bottom: auto;
+      }
+    }
+  }
+
 // ensure components don't leak from parent
 *, ::after, ::before {
     box-sizing: border-box;
@@ -1108,7 +1123,39 @@ $product-two-col-width: calc((100% - 40px)/2);
 }
 
 
+/* ERROR/404 */
 
+#error-404 {
+    height: calc(100vh - #{$header-height} - 80px);
+
+    @include phone {
+        height: calc(100vh - #{$header-height});
+    }
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
+    padding: 0 25px;
+    position: relative;
+    transition: 0.15s;
+    padding-bottom: 1px;
+    background: $black;
+    color: $white;
+    margin-top: $offset-global;
+
+    @include phone {
+        margin-top: $line-global;
+    }
+
+    &:hover {
+        opacity: 0.85;
+    }
+}
 
 
 
