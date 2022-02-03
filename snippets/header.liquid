@@ -17,7 +17,9 @@
             </a>
         {% endunless %}
 
-        <a class="header-title" href="/">{{ 'general.shop.title' | t | downcase }}</a>
+        <a class="header-logo" href="/">
+            <img src="{{ 'logo.svg' | asset_url }}" alt="logo" />
+        </a>
         
         <div class="cart-button-container" @click="toggleMiniCart">
             <button class="cart-button">
@@ -34,7 +36,9 @@
     </div>
 
     <div class="header-mobile">
-        <a href="/" class="header-title">{{ 'general.shop.title' | t | downcase }}</a>
+        <a class="header-logo" href="/">
+            <img src="{{ 'logo.svg' | asset_url }}" alt="logo" />
+        </a>
         <div class="mobile-nav">
             <button class="mobile-nav-button" @click="toggleMenu">
                 <span>{{ 'header.nav.menu' | t }}</span>
