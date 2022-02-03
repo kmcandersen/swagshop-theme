@@ -1,23 +1,76 @@
-<div class="hero-image section">
-    <img src="{{ section.settings.image | img_url: 'master' }}" alt="">
+<div id="hero">
+    {%- comment -%}eg a blog post would be linked here{%- endcomment -%}
+    <a href="/">
+        <div class="hero-image section">
+            <img src="{{ section.settings.image | img_url: 'master' }}" alt="">
+        </div>
+        <div class="rich-text">
+            <h2 class="heading">
+                {{ section.settings.title }}
+            </h2>
+            {% if section.settings.text %}
+                <div class="subhead">
+                    {{ section.settings.text }}
+                </div>
+            {% endif %}
+        </div>
+    </a>
 </div>
 
 {% schema %}
 {
 
-    "name": "Hero Image",
+    "name": "Hero Image & Text",
     "settings": [
         {
             "type": "image_picker",
             "id": "image",
             "label": "Image"
-        }
-    ], 
-    "presets": [
+        },
         {
-            "name": "Hero Image",
-            "category": "Image"
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Section Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Description (optional)",
+            "default": "<p>Write description here.</p>"
+            }
+        ], 
+        "blocks": [
+        {
+            "type": "slide",
+            "name": "Slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }, {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "placeholder": "Slide Title"
+                }, {
+                    "type": "textarea",
+                    "id": "content",
+                    "label": "Slide Content"
+                }
+            ]
         }
-    ]
-}
+    ],
+        "presets": [
+            {
+                "name": "Hero Image",
+                "category": "Image"
+            },
+            {
+                "name": "Rich Text",
+                "category": "Text"
+            }
+        ]
+    }
 {% endschema %}

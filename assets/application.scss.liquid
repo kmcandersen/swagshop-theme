@@ -951,12 +951,15 @@ $product-two-col-width: calc((100% - 40px)/2);
 
 
 /* HERO SECTION */
+#hero {
+    position: relative;
+}
 
 .hero-image {
     width: 100%;
-    height: 50vh;
-    min-height: 250px;
-    padding-bottom: $line-global;
+    height: 70vh;
+    min-height: 300px;
+    padding-bottom: $offset-global;
 
     img {
         height: 100%;
@@ -972,25 +975,48 @@ $product-two-col-width: calc((100% - 40px)/2);
 /* RICH TEXT SECTION */
 
 .rich-text {
-    margin-bottom: $line-global * 3;
-}
-
-.heading {
-    font-size: $type-headline-xl;
-    line-height: 1.2;
+    position: absolute;
+    bottom: $offset-global * 2;
+    left: $offset-global * 2;
+    right: $offset-global * 2;
+    color: $light-white;
 
     @include phone {
-        font-size: $type-headline-xl-phone;
+        bottom: $offset-global * 1.5;
+        left: $offset-global;
+        right: $offset-global;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-}
 
-.subhead > p {
-    font-size: $type-headline-med;
-    font-family: $med-font;
-    margin-top: $line-global/2;
+    .heading {
+        display: inline-block;
+        font-size: $type-headline-xl;
+        line-height: 1.2;
+        padding: 0 $line-global 5px;
+        background-color: $light-black;
 
-    @include phone {
-        font-size: $type-headline-med-phone;
+        @include phone {
+            font-size: $type-headline-xl-phone;
+        }
+    }
+
+    .subhead > p {
+        display: inline-block;
+        background-color: $light-black;
+        font-size: $type-headline-med;
+        font-family: $med-font;
+        padding: $line-global/2 $line-global;
+        position: relative;
+        left: $offset-global;
+
+        @include phone {
+            font-size: $type-headline-med-phone;        
+            position: static;
+            
+        }
     }
 }
 
