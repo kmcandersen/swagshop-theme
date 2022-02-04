@@ -1184,6 +1184,41 @@ $product-two-col-width: calc((100% - 40px)/2);
 }
 
 
+/* PAGE */
+
+#page {
+    min-height: 80vh;
+    
+    .page-content {
+        margin-top: $offset-global;
+
+        h2 {
+            padding: $line-global 0 $line-global/2;
+        }
+
+        p, li {
+            font-family: $med-font;
+            padding-bottom: $line-global;
+        }
+
+        * > strong, li > strong, strong {
+            font-family: $bold-font;
+            display: inline-block;
+            padding-bottom: $line-global/2;
+        }
+
+        li > strong {
+            padding-bottom: 0;
+        }
+    }
+    
+    .page-inner {
+        max-width: 500px;
+        margin: $offset-global auto;
+    }
+
+}
+
 
 
 
