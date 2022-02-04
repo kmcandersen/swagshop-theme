@@ -388,8 +388,7 @@ a {
 
 /* PRODUCT PAGE */
 
-// $gutter-global = 40px
-$product-two-col-width: calc((100% - 40px)/2);
+$product-two-col-width: calc((100% - #{$gutter-global})/2);
 
 .product-template {
     padding-top: $line-global;
@@ -402,11 +401,10 @@ $product-two-col-width: calc((100% - 40px)/2);
         grid-template-columns: 100%;
     }
 
-    // $header-height = 72px $offset-global = 40px
     .swiper-container-product-page {
         overflow: hidden;
         width: 100%;
-        height: calc(100vh - 72px - 40px);
+        height: calc(100vh - #{$header-height} - #{$offset-global});
     }
 
     .swiper-button-next::before {
@@ -538,16 +536,14 @@ $product-two-col-width: calc((100% - 40px)/2);
     }
 
     .product-card {
-        // $gutter-global = 40px * 3 gutters = 120px
-        width: calc((100% - 120px) / 4);
+        width: calc((100% - #{$gutter-global} * 3) / 4);
         min-width: 250px;
         margin: $card-grid-margin $card-grid-margin $gutter-global;
         margin-bottom: 32px;
         height: 100%;
     
         @include phone {
-            // $offset-phone = 25px * 1 gutter
-            width: calc((100% - 25px) / 2);
+            width: calc((100% - #{$offset-phone}) / 2);
             min-width: 120px;
             margin: 0;
             margin-bottom: $gutter-global;
