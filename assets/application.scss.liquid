@@ -105,6 +105,7 @@ $offset-phone: 25px;
 
 $header-height: 72px;
 
+$type-headline-xxl: 50px;
 $type-headline-xl: 40px;
 $type-headline-xl-phone: 25px;
 $type-headline-lg: 25px;
@@ -142,13 +143,13 @@ header {
 
 h1,
 .h1 {
-  font-size: $type-headline-xl;
-  line-height: $line-global * 2.25;
+    font-size: $type-headline-xl;
+    line-height: $line-global * 2.25;
 
-  @include phone {
-    font-size: $type-headline-xl-phone;
-    line-height: $line-global * 1.5;
-  }
+    @include phone {
+        font-size: $type-headline-xl-phone;
+        line-height: $line-global * 1.5;
+    }
 }
 
 h2,
@@ -989,10 +990,14 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
 
     .heading {
         display: inline-block;
-        font-size: $type-headline-xl;
+        font-size: $type-headline-xxl;
         line-height: 1.2;
         padding: 0 $line-global 5px;
         background-color: $light-black;
+
+        @include tablet {
+            font-size: $type-headline-xl;
+        }
 
         @include phone {
             font-size: $type-headline-xl-phone;
@@ -1002,16 +1007,20 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
     .subhead > p {
         display: inline-block;
         background-color: $light-black;
-        font-size: $type-headline-med;
+        font-size: $type-headline-lg;
         font-family: $med-font;
         padding: $line-global/2 $line-global;
         position: relative;
         left: $offset-global;
 
+        @include tablet {
+            font-size: $type-headline-med;
+        }
+
         @include phone {
-            font-size: $type-headline-med-phone;        
+            font-size: $type-headline-med-phone;  
+            padding: $line-global/3 $line-global;     
             position: static;
-            
         }
     }
 }
