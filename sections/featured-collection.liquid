@@ -1,0 +1,71 @@
+{%- liquid
+    assign products_to_display = section.settings.collection.all_products_count
+    assign num_products_to_show = section.settings.products_to_show
+
+    if products_to_display > num_products_to_show
+      assign more_in_collection = true
+    endif
+  -%}
+
+  <div class="section">
+    <div class="featured-coll">
+      <h2 class="items-row-heading">{{ section.settings.title }}</h2>
+        <div class="items-row flex {% if num_products_to_show > 4 %}flex-wrap{% endif %}">
+        {%- for product in section.settings.collection.products limit: num_products_to_show -%}
+            {% render 'product-card' with product as product %}
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.show_view_all and more_in_collection -%}
+        <button class="featured-coll-button">
+            <a href="{{ section.settings.collection.url }}"
+                aria-label="{{ 'sections.featured_collection.view_all_button' | t: collection_name: section.settings.collection.title }}"
+            >
+                {{ 'sections.featured_collection.view_all_button' | t }}
+            </a>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+
+
+
+{% schema %}
+{
+    "name": "Featured collection",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section heading",
+          "default": "Featured collection"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_to_show",
+          "label": "No. of products to show",
+          "info": "Recommended: 4 or 8",
+          "min": 4,
+          "max": 8,
+          "step": 2,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "show_view_all",
+          "default": true,
+          "label": "Enable 'View all' button"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Featured Collection",
+            "category": "Image"
+        }
+    ]
+}
+{% endschema %}

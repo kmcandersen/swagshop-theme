@@ -34,5 +34,10 @@
       "subtotal": "Subtotal:",
       "button": "Checkout"
     }
+  }, 
+  "sections" : {
+    "featured_collection": {
+      "view_all_button": "View All"
+    }
   }
 }
