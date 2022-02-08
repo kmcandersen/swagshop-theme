@@ -1,6 +1,8 @@
 <div class="hero">
-    {%- comment -%}eg a blog post or collection would be linked here{%- endcomment -%}
-    <a href="/">
+    {% unless section.settings.link == blank %}
+        <a href="{{ section.settings.link }}">
+    {% endunless %}
+
         <div class="hero-image section">
             <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.alt_text }}">
         </div>
@@ -8,13 +10,15 @@
             <h2 class="heading">
                 {{ section.settings.heading }}
             </h2>
-            {% if section.settings.description %}
+            {% unless section.settings.description == blank %}
                 <div class="subhead">
                     {{ section.settings.description }}
                 </div>
-            {% endif %}
+            {% endunless %}
         </div>
-    </a>
+    {% unless section.settings.link == blank %}
+        </a>
+    {% endunless %}
 </div>
 
 {% schema %}
@@ -33,6 +37,12 @@
             "id": "alt_text",
             "label": "Image alt text",
             "default": "hero image"
+        },
+        {
+            "type": "url",
+            "id": "link",
+            "label": "Select a resource",
+            "default": "/collections/all"
         },
         {
             "type": "text",
