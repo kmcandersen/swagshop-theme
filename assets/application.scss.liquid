@@ -1303,6 +1303,10 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
         width: calc((100% - #{$gutter-global} * 3) / 4);
         text-align: center;
         margin: 0 auto;
+
+        @include tablet {
+            width: max-content;
+        }
     
         a {
             color: $light-white;
