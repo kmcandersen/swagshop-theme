@@ -532,6 +532,14 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
 /* COLLECTION PAGE */
 
 #collection {
+
+    .collection-title {
+        padding-bottom: $line-global;
+    }
+
+    .collection-list {
+        justify-content: center;
+    }
    
     .product-card {
         width: calc((100% - #{$gutter-global} * 3) / 4);
@@ -547,16 +555,10 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
         }
 
         @include phone {
-            width: calc((100% - #{$offset-phone}) / 2);
+            width: calc((100% - 27px) / 2);
+            margin: $line-global / 3;
+            margin-bottom: $gutter-global;
         }
-    }
-
-    .collection-title {
-        padding-bottom: $line-global;
-    }
-
-    .collection-list {
-        justify-content: center;
     }
 
 }
@@ -569,6 +571,10 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
     overflow: hidden;
     position: relative;
     margin-bottom: 15px;
+
+    @include phone {
+        margin-bottom: 9px;
+    }
 }
 
 .product-card-price {
