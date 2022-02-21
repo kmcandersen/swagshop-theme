@@ -456,8 +456,16 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
             margin: $line-global/2 0 $line-global;
             line-height: 1.2;
         }
-
     }
+
+    .product-price {
+        margin-top: $line-global;
+        letter-spacing: 0.5px;
+        @include phone {
+            margin-top: $line-global/2;
+        }
+    }
+    
     
     .product-description {
         width: 50%;

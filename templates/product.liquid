@@ -19,6 +19,9 @@
     <div class="product-description-container">
         <div class="product-title">
             <h1>{{ product.title }}</h1>
+            <div class="product-price">
+                {{ product.price | money }}
+            </div>
         </div>
 
         <div class="product-bottom">
