@@ -38,6 +38,9 @@
   "sections" : {
     "featured_collection": {
       "view_all_button": "View All"
+    },
+    "image_with_text": {
+      "default_button": "Shop Now"
     }
   }
 }

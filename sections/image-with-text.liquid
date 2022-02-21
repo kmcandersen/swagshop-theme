@@ -1,64 +1,107 @@
-<div class="image-with-text section {% if section.settings.reverse %}reverse{% endif %}">
-    <img src="{{ section.settings.image | img_url: 'large' }}" alt="{{ section.settings.title }}">
-    <div class="image-with-text-description-container bg-color-{{ section.settings.bgcolor }}">
-        <div class="image-with-text-description">
-            <h3 class="image-with-text-head">{{ section.settings.title }}</h3>
-            {% if section.settings.text %}
-                <div class="image-with-text-body {% if section.settings.bgcolor == 'black' %}text-white{% endif %}">
-                    {{ section.settings.text }}
+<div class="section">
+    {% for block in section.blocks %}
+        <div class="image-with-text {% if block.settings.reverse %}reverse{% endif %}" {{ block.shopify.attributes }}>
+            <img src="{{ block.settings.image | img_url: 'large' }}" alt="{{ block.settings.title }}">
+            <div class="image-with-text-description-container bg-color-{{ block.settings.bgcolor }}">
+                <div class="image-with-text-description">
+                    <h3 class="image-with-text-head">{{ block.settings.title }}</h3>
+                    {% if block.settings.text %}
+                        <div class="image-with-text-body {% if block.settings.bgcolor == 'black' %}text-white{% endif %}">
+                            {{ block.settings.text }}
+                        </div>
+                    {% endif %}
+                    {% if block.settings.show_button and block.settings.button_url != blank %}
+                        <button class="image-text-button">
+                            <a href="{{ block.settings.button_url }}" >
+                                {% if block.settings.button_text != blank %}
+                                    {{ block.settings.button_text }}
+                                {% else %}
+                                    {{ 'sections.image_with_text.default_button' | t }}
+                                {% endif %}
+                            </a>
+                        </button>
+                    {% endif %}
                 </div>
-            {% endif %}
+            </div>
         </div>
-    </div>
+    {% endfor %}
 </div>
 
 {% schema %}
 {
     "name": "Image with Text",
-    "settings": [
-        {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Image"
-        },
-        {
-            "type": "text",
-            "id": "title",
-            "label": "Heading",
-            "default": "Image with Text"
-        },
-        {
-            "type": "richtext",
-            "id": "text",
-            "label": "Description (optional)",
-            "default": "<p>Write description here</p>"
-        },
-        {
-            "type": "checkbox",
-            "id": "reverse",
-            "label": "Image on Right",
-            "default": false
-        },
-        {
-            "type": "select",
-            "id": "bgcolor",
-            "label": "Background Color",
-            "options": [
-                {
-                    "value": "white",
-                    "label": "White"
-                }, {
-                    "value": "black",
-                    "label": "Black"
-                }
-            ],
-            "default": "white"
-        }
-    ],
+    "blocks": [{
+        "name": "Image with Text Block",
+        "type": "image_text",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Heading",
+                "default": "Image with Text"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Description (optional)",
+                "default": "<p>Write description here</p>"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_button",
+                "label": "Show Button?",
+                "default": true
+            }, {
+                "type": "url",
+                "id": "button_url",
+                "label": "Select a resource (required)"
+            }, {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text",
+                "placeholder": "Shop Now",
+                "info": "Defaults to \"Shop Now\""
+            }, 
+            {
+                "type": "checkbox",
+                "id": "reverse",
+                "label": "Image on Right",
+                "default": false
+            },
+            {
+                "type": "select",
+                "id": "bgcolor",
+                "label": "Background Color",
+                "options": [
+                    {
+                        "value": "white",
+                        "label": "White"
+                    }, {
+                        "value": "black",
+                        "label": "Black"
+                    }
+                ],
+                "default": "white"
+            }
+        ]
+    }],
     "presets": [
         {
             "name": "Image with Text",
-            "category": "Image"
+            "category": "Image",
+            "blocks": [
+                {
+                    "type": "image_text"
+                },
+                {
+                    "type": "image_text"
+                }
+            ]
         }
     ]
 }

@@ -1075,6 +1075,39 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
     }
 }
 
+.image-with-text .image-text-button {
+    margin-top: $line-global;
+    padding: $line-global/2 $line-global;
+    cursor: pointer;
+    background-color: $black;
+    font-size: $type-body-med;
+    width: max-content;
+    text-align: center;
+
+    a {
+        color: $light-white;
+    }
+
+    &:hover {
+        background-color: $light-black;
+    }
+    
+}
+
+.image-with-text.reverse .image-text-button {
+    background-color: $white;
+    font-size: $type-body-med;
+
+    a {
+        color: $light-black;
+    }
+
+    &:hover {
+        background-color: $hover-white;
+    }
+    
+}
+
 .image-with-text-description {
     padding: 25px $offset-global*2;
     display: flex;
