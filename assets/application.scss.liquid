@@ -237,10 +237,10 @@ button, input, option, textarea {
 }
 
 .section {
-    padding: 0 $offset-global;
+    padding: 0 $offset-global $offset-global*3;
 
     @include phone {
-        padding: 0 $offset-phone;
+        padding: 0 $offset-phone $offset-phone*2;
     }
  }
 
@@ -967,6 +967,7 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
     height: 70vh;
     min-height: 300px;
     padding-bottom: $offset-global;
+    margin-bottom: $offset-global*2;
 
     img {
         height: 100%;
@@ -976,6 +977,7 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
 
     @include phone {
         height: 270px;
+        margin-bottom: 0;
     }
 }
 
@@ -1146,7 +1148,6 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
 
 .logo-list {
     width: 100%;
-    margin: $line-global * 3 0;
 }
 
 .logo-container {
@@ -1271,7 +1272,6 @@ $product-two-col-width: calc((100% - #{$gutter-global})/2);
 .featured-coll {
     display: flex;
     flex-direction: column;
-    margin: $offset-global 0 $offset-global * 2; 
 
     .items-row {
         justify-content: center;
