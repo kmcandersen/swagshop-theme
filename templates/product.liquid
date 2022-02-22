@@ -5,13 +5,19 @@
     <div class="product-images">
         <div class="swiper-container-product-page swiper-container-{{- product.id -}}">
             <div class="swiper-wrapper">
-                {% for image in product.images %}
+                {% if product.images.size > 1 %}
+                    {% for image in product.images %}
+                        <div class="swiper-slide">
+                            <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}"/>
+                            <div class="swiper-button-next swiper-button-next-{{- product.id -}}"></div>
+                            <div class="swiper-button-prev swiper-button-prev-{{- product.id -}}"></div>
+                        </div>
+                    {% endfor %}
+                {% else %}
                     <div class="swiper-slide">
-                        <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}"/>
-                        <div class="swiper-button-next swiper-button-next-{{- product.id -}}"></div>
-                        <div class="swiper-button-prev swiper-button-prev-{{- product.id -}}"></div>
+                        <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ image.alt | escape }}"/>
                     </div>
-                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -53,5 +59,3 @@
         }
     })
 </script>
-
-
