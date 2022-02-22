@@ -18,7 +18,7 @@
       {%- if section.settings.show_view_all and more_in_collection -%}
         <button class="featured-coll-button">
             <a href="{{ section.settings.collection.url }}"
-                aria-label="{{ 'sections.featured_collection.view_all_button' | t: collection_name: section.settings.collection.title }}"
+                aria-label="Go to {{ section.settings.collection.title }}"
             >
                 {{ 'sections.featured_collection.view_all_button' | t }}
             </a>
