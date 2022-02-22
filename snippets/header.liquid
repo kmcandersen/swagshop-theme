@@ -2,14 +2,14 @@
     <div class="header-inner flex space-between">
 
         {% unless template == "product" %}
-            <button class="menu-button" @click="toggleMenu">
+            <button @click="toggleMenu" class="menu-button">
                 <svg class="menu-arrow-icon">
                     {% render 'header-arrow' %}
                 </svg>
                 <span>{{ 'header.nav.menu' | t }}</span>
-            </button>            
-        {% else %}   
-            <a href="javascript:history.back()" class="menu-button">
+            </button>
+        {% else %}
+            <a class="menu-button" href="javascript:history.back()">
                 <svg class="menu-arrow-icon" style="transform: none;">
                     {% render 'header-arrow' %}
                 </svg>
@@ -18,14 +18,23 @@
         {% endunless %}
 
         <a class="header-logo" href="/">
-            <img src="{{ 'logo.svg' | asset_url }}" alt="logo" />
+            <img src="{{ 'logo.svg' | asset_url }}" alt="logo"/>
         </a>
-        
-        <div class="cart-button-container" @click="toggleMiniCart">
+
+        {% if request.page_type == 'index' %}
+            <a class="header-logo" href="#top">
+                {% else %}
+            <a class="header-logo" href="/">
+        {% endif %}
+                <img src="{{ 'logo.svg' | asset_url }}" alt="logo"/>
+            </a>
+
+        <div @click="toggleMiniCart" class="cart-button-container">
             <button class="cart-button">
                 <span>
                     <template v-if="cart">
-                        {{ 'header.nav.cart' | t }} (${cart.item_count})
+                        {{ 'header.nav.cart' | t }}
+                        (${cart.item_count})
                     </template>
                 </span>
                 <svg class="cart-arrow-icon">
@@ -37,98 +46,103 @@
 
     <div class="header-mobile">
         <a class="header-logo" href="/">
-            <img src="{{ 'logo.svg' | asset_url }}" alt="logo" />
+            <img src="{{ 'logo.svg' | asset_url }}" alt="logo"/>
         </a>
         <div class="mobile-nav">
-            <button class="mobile-nav-button" @click="toggleMenu">
+            <button @click="toggleMenu" class="mobile-nav-button">
                 <span>{{ 'header.nav.menu' | t }}</span>
             </button>
-            <button class="mobile-nav-button" @click="toggleMiniCart">
+            <button @click="toggleMiniCart" class="mobile-nav-button">
                 <span>{{ 'header.nav.cart' | t }}</span>
             </button>
         </div>
     </div>
 
     {%- comment -%} refers to menuDrawer func below{%- endcomment -%}
-    <div id="menu-drawer" :class="{ hidden: menuDrawer }">
+    <div :class="{ hidden: menuDrawer }" id="menu-drawer">
         {% render 'menu-drawer' %}
     </div>
 
     {%- comment -%} refers to miniCart func below{%- endcomment -%}
-    <div id="mini-cart" :class="{ hidden: miniCart }">
-        <button class="mini-cart-close-button" @click="toggleMiniCart">Close</button>
+    <div :class="{ hidden: miniCart }" id="mini-cart">
+        <button @click="toggleMiniCart" class="mini-cart-close-button">Close</button>
         {% render 'mini-cart' %}
     </div>
     {%- comment -%}displays if .hidden values below are false; click to close open mini-cart{%- endcomment -%}
-    <div class="outside" v-if="!miniCart || !menuDrawer" @click="closeAllDrawers"></div>
+    <div @click="closeAllDrawers" class="outside" v-if="!miniCart || !menuDrawer"></div>
 
 </header>
 
 <script>
-    if (document.querySelector('#header')) {
+    if (document.querySelector("#header")) {
         const headerCart = Vue.createApp({
-            delimiters: ['${', '}'],
+            delimiters: [
+                "${", "}"
+            ],
             data() {
-                return {
-                    cartData: store.state.cartState
-                }
+                return {cartData: store.state.cartState}
             },
             methods: {
-                toggleMiniCart(){
+                toggleMiniCart() {
                     toggleMiniCart.openCart()
                 },
-                toggleMenu(){
+                toggleMenu() {
                     toggleMenu.openMenu()
                 },
                 // enables click off open mini-cart to close
-                closeAllDrawers(){
+                closeAllDrawers() {
                     toggleClose.closeAll();
                 },
-                decrement(item){
+                decrement(item) {
                     const data = {
                         "id": item.key,
                         "quantity": item.quantity - 1
                     }
-                
-                    axios.post('/cart/change.js', data)
+
+                    axios
+                        .post("/cart/change.js", data)
                         .then(res => {
                             store.getCart()
                         })
                         .catch((err) => console.log(err))
                 },
-                increment(item){
+                increment(item) {
                     const data = {
                         "id": item.key,
                         "quantity": item.quantity + 1
                     }
-                
-                    axios.post('/cart/change.js', data)
+
+                    axios
+                        .post("/cart/change.js", data)
                         .then(res => {
                             store.getCart()
                         })
                         .catch((err) => console.log(err))
                 },
-                money(value){
-                    if (!value) return 0;
-                    return "$" + (value/100).toFixed(2);
-                }                    
-            },           
+                money(value) {
+                    if (!value) 
+                        return 0;
+                    
+                    return "$" + (
+                        value / 100
+                    ).toFixed(2);
+                }
+            },
             computed: {
-                miniCart(){
+                miniCart() {
                     return miniCartState.hidden
                 },
-                menuDrawer(){
+                menuDrawer() {
                     return menuState.hidden
                 },
-                cart(){
+                cart() {
                     return this.cartData[0]
                 }
             },
             // when header loads, gets cart data from Shopify
-            created(){
+            created() {
                 store.getCart()
             }
-        }).mount('#header')
+        }).mount("#header")
     }
-
 </script>
